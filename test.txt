@@ -1,0 +1,16 @@
+
+gateway
+http://localhost:7777/api/recommendations/Pablo
+nodo
+http://localhost:7777/api/recommendations/Pablo
+http://localhost:9001/api/member/Pablo
+
+Nodo
+http://localhost:9002/hystrix.stream
+http://localhost:7777/hystrix.stream
+http://localhost:9009/hystrix.stream
+
+
+Cluster
+http://localhost:9999/turbine.stream?cluster=GATEWAYEDGESERVER
+http://localhost:9999/turbine.stream?cluster=RECOMMENDATIONS
