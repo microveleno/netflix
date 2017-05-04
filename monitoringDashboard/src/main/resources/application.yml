@@ -1,0 +1,6 @@
+server.port: ${PORT:8888}
+spring.application.name: hystrix-dash
+security.basic.enabled: false
+#feign:
+#  histrix:
+#    enabled: false

@@ -1,0 +1,36 @@
+server.port: ${PORT:7777}
+spring.application.name: gatewayEdgeServer
+security.basic.enabled: false
+
+eureka:
+  client.serviceUrl.defaultZone: http://localhost:9000/eureka/,http://localhost:9010/eureka/
+  instance.metadataMap.instanceId: ${spring.application.name}:${server.port}
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    recommendations:
+      path: /api/recommendations/**
+      stripPrefix: false
+    membership:
+      path: api/member/**
+      stripPrefix: false
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+#ribbon:
+#  ConnectTimeout: 3000
+#  ReadTimeout: 60000
+  
+  
+#  zuul:
+#  routes:
+#    httpbin:
+ #     path: /**
+ #     serviceId: httpbin
+
+#httpbin:
+#  ribbon:
+#    listOfServers: httpbin.org,eu.httpbin.org
+
+
+#(https://blog.heroku.com/archives/2016/3/2/using_netflix_zuul_to_proxy_your_microservices)This configuration tells Zuul to forward all requests to the httpbin service, which is defined after the zuul entry. The httpbin entry defines the available servers: 
