@@ -1,5 +1,3 @@
-server:
- port: ${PORT:9999}
 spring:
  application.name: aggregatorCluster
 security.basic.enabled: false

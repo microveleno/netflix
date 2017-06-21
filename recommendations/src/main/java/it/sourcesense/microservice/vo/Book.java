@@ -1,5 +1,6 @@
 package it.sourcesense.microservice.vo;
 
+
 public class Book {
 	
 	public String title;
