@@ -4,11 +4,15 @@ spring:
  application.name: aggregatorCluster
 security.basic.enabled: false
 
-turbine:
 
+
+turbine:
  appConfig: gatewayEdgeServer,recommendations
  aggregator:
   clusterConfig: GATEWAYEDGESERVER,RECOMMENDATIONS
+  clusterNameExpression: new String('default')
   
 
-eureka.client.serviceUrl.defaultZone: http://localhost:9000/eureka/
+eureka:
+  client.serviceUrl.defaultZone: http://localhost:9000/eureka/
+  instance.metadataMap.instanceId: ${spring.application.name}:${server.port}

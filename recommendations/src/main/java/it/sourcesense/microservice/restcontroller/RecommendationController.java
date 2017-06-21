@@ -1,6 +1,8 @@
 package it.sourcesense.microservice.restcontroller;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,7 @@ import com.google.common.collect.Sets;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 
+import it.sourcesense.microservice.RecommendationsApplication;
 import it.sourcesense.microservice.exception.UserNotFoundException;
 import it.sourcesense.microservice.vo.Book;
 import it.sourcesense.microservice.vo.Member;
@@ -21,6 +24,10 @@ import it.sourcesense.microservice.vo.Member;
 @RequestMapping("/api/recommendations")
 @Component
 public class RecommendationController {
+	
+	private static final Logger LOG = Logger.getLogger(RecommendationsApplication.class.getName());
+
+	
   
 	 @Autowired
 	    private RestTemplate restTemplate;
@@ -39,6 +46,7 @@ public class RecommendationController {
         })
     public Set<Book> findRecommendationsForUser(@PathVariable String user) throws UserNotFoundException {
         Member member = restTemplate.getForObject("http://membership/api/member/{user}", Member.class, user);
+        LOG.log(Level.INFO, "you called home");
         if(member == null) throw new UserNotFoundException();
         return member.getAge() < 17 ? kidRecommendations : adultRecommendations;
     }

@@ -1,12 +1,8 @@
-spring:
- profiles: docker
-
-server:
-  port: 9000
-
 eureka:
+  server:
+    enableSelfPreservation: true
   instance:
-    hostname: eurekasrv
+    hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false

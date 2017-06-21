@@ -1,3 +1,2 @@
-spring:
-  application:
-    name: racommendation
+server:
+  port: ${PORT:9002}
