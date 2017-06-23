@@ -1,0 +1,23 @@
+spring:
+ application:
+   name: Admin
+server:
+  port: ${PORT:1111}
+
+
+spring.boot.admin.turbine:
+  clusters: GATEWAYEDGESERVER,RECOMMENDATIONS
+  url: http://localhost:9999/turbine.stream
+  routes:
+    endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,activiti,refresh,flyway,liquibase,heapdump,hystrix.stream
+
+management:
+  security:
+    enabled: false
+
+eureka:
+ client:
+   serviceUrl:
+     defaultZone: http://localhost:9000/eureka/
+
+       
