@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.sourcesense</groupId>
+	<groupId>com.veleno.microservice</groupId>
 	<artifactId>spring-boot-admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -24,6 +24,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<docker-version-immage>0.4.14</docker-version-immage>
 	</properties>
 
 	<dependencies>
@@ -48,7 +49,7 @@
 		</dependency>
 		<!-- end cloud dependencies -->
 
-		<!--start admin dashboard dependencies-->
+		<!--start admin dashboard dependencies -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server</artifactId>
@@ -74,7 +75,7 @@
 			<artifactId>spring-boot-admin-server-ui-turbine</artifactId>
 			<version>1.4.6</version>
 		</dependency>
-		<!--end admin dashboard dependencies-->
+		<!--end admin dashboard dependencies -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -103,22 +104,53 @@
 	</dependencyManagement>
 
 	<build>
-	<finalName>${project.artifactId}</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+		<finalName>${project.artifactId}</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+				<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker-version-immage}</version>
+				<configuration>
+				<dockerCertPath>/Users/pablo/.docker/machine/machines/default</dockerCertPath> 
+				<dockerHost>https://192.168.99.100:2376</dockerHost>
+		
+					
+					<imageName>${project.build.finalName}</imageName>
+					<baseImage>java:8</baseImage>
+					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+	
 		</plugins>
 	</build>
-	<profiles/>
-	
+	<profiles />
+
 
 
 

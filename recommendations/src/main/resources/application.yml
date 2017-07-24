@@ -1,6 +1,12 @@
 spring:
   application:
     name: recommendations
+  zipkin:
+    # Uncomment to send to zipkin, replacing 192.168.99.100 with your zipkin IP address
+    baseUrl: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 security:
   basic:
     enabled: false

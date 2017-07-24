@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.sourcesense.SpringBootAdminApplication</config>
+		<config>java:com.veleno.microservice.SpringBootAdminApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

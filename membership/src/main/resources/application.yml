@@ -1,6 +1,12 @@
 spring:
   application:
     name: membership
+  zipkin:
+    # Uncomment to send to zipkin, replacing 192.168.99.100 with your zipkin IP address
+    baseUrl: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
 security:
   basic:
     enabled: false
@@ -24,3 +30,6 @@ eureka:
       
 #spring.cloud.config.discovery.enabled: true
 #logging.pattern.console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [trace=%X{X-Trace-Id:-},span=%X{X-Span-Id:-}] [%15.15t] %-40.40logger{39}: %m%n'
+
+#spring.sleuth.sampler.percentage = 0.2
+

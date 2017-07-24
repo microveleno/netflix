@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>it.sourcesense.microservice</groupId>
+	<groupId>com.veleno.microservice</groupId>
 	<artifactId>serviceRegistryMaster</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -69,7 +69,8 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.9</version>
 				<configuration>
-					<imageName>master-thesis/eureka-server:lastest</imageName>
+				   <dockerCertPath>/Users/pablo/.docker/machine/machines/default</dockerCertPath> 
+					<imageName>eureka-server:lastest</imageName>
 					<dockerDirectory>src/main/docker</dockerDirectory>
 					<resources>
 						<resource>
